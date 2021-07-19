@@ -15,15 +15,10 @@ interface Props {
     count: number
   }[]
 }
+
 const Container = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
-`
-
-const TriggerContainer = styled.div`
-  display: flex;
-  flex-direction: column;
   align-items: center;
   position: relative;
 `
@@ -75,28 +70,25 @@ export const TriggerButton:React.FC<Props> = ({emojis, onEmojiClicked}) => {
   }
 
   return (
-    <Container>
-      <TriggerContainer ref={triggerRef}>
-        {
-          showEmojis &&
-          <EmojisList>
-            {
-              emojis.map((emoji, index) => {
-                return <EmojiButton 
-                  key={index} 
-                  data={emoji}
-                  onEmojiClick={handleEmojiClick}
-                />
-              })
-            }
-          </EmojisList>
-        }
-        <AddReaction onClick={handleClick}>
-          <SmilePlus />
-        </AddReaction>
-      </TriggerContainer>
-    </Container>
-    
+    <Container ref={triggerRef}>
+      {
+        showEmojis &&
+        <EmojisList>
+          {
+            emojis.map((emoji, index) => {
+              return <EmojiButton 
+                key={index} 
+                data={emoji}
+                onEmojiClick={handleEmojiClick}
+              />
+            })
+          }
+        </EmojisList>
+      }
+      <AddReaction onClick={handleClick}>
+        <SmilePlus />
+      </AddReaction>
+    </Container>    
   )
 }
 

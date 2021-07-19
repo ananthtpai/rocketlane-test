@@ -11,7 +11,7 @@ export default {
 export const Normal = () => (
   <EmojiCount
     emoji={'👍'}
-    count={1}
+    count={5}
   />
 )
 

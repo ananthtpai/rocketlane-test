@@ -29,8 +29,13 @@ interface Props {
 
 export const EmojiCount:React.FC<Props> = ({highlight = false, emoji, count}) => {
 
+  const handleOnClick:React.MouseEventHandler<HTMLDivElement> = (e) => {
+    if (highlight) {
+      return 
+    }
+  }
   return (
-    <Container highlight={highlight}>
+    <Container highlight={highlight} onClick={handleOnClick}>
       <div>{emoji}</div> 
       <div>{count}</div>
     </Container>

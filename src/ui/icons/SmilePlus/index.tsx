@@ -19,7 +19,7 @@ const PlusIcon = styled.img`
 `
 
 interface Props {
-  /** width in pxs of the Icon max width is 100px*/
+  /** width in pxs of the Icon max width is 100px, if width is not provided it fits to the width of the container*/
   width?: number
 }
 

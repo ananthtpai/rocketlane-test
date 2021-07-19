@@ -8,10 +8,14 @@ import EmojiButton, { EmojiData } from '../Emoji'
 interface Props {
   /** input array of emojis */
   emojis: EmojiData[]
+  /** On emoji clicked send item that was clicked */
+  onEmojiClicked: (item: EmojiData) => void,
+  reactions?: {
+    emoji: string,
+    count: number
+  }[]
 }
 const Container = styled.div`
-  // width: 300px;
-  // height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,12 +27,14 @@ const TriggerContainer = styled.div`
   align-items: center;
   position: relative;
 `
+ 
 const AddReaction = styled.button`
   width: 32px;
   height: 32px;
   border: 1px solid #e0e0e0;
   border-radius: 50%;
   position: relative;
+  cursor: pointer;
 `
 
 const EmojisList = styled.div`
@@ -43,7 +49,7 @@ const EmojisList = styled.div`
   box-shadow: 0 3px 10px #e0e0e0;
 `
 
-export const TriggerButton:React.FC<Props> = ({emojis}) => {
+export const TriggerButton:React.FC<Props> = ({emojis, onEmojiClicked}) => {
   const triggerRef = useRef<HTMLDivElement>(null)
   const [ showEmojis, setShowEmojis ] = useState(false)
 
@@ -64,8 +70,8 @@ export const TriggerButton:React.FC<Props> = ({emojis}) => {
     setShowEmojis(!showEmojis)
   }
 
-  const handleEmojiClick = (emoji: string) => {
-
+  const handleEmojiClick = (emoji: EmojiData) => {
+    onEmojiClicked(emoji)
   }
 
   return (
@@ -78,7 +84,7 @@ export const TriggerButton:React.FC<Props> = ({emojis}) => {
               emojis.map((emoji, index) => {
                 return <EmojiButton 
                   key={index} 
-                  {...emoji}
+                  data={emoji}
                   onEmojiClick={handleEmojiClick}
                 />
               })

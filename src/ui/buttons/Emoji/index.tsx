@@ -8,7 +8,9 @@ const Container = styled.button`
   padding: 0 8px;
   border: none;
   background: none;
+  cursor: pointer;
 `
+
 const Emoji = styled.div`
   &:hover {
     transform: scale(2);
@@ -16,23 +18,25 @@ const Emoji = styled.div`
   }
 `
 export type EmojiData = {
-  title: string,
-  text: string
+  id: number,
+  name: string,
+  emoji: string
 }
 
-interface Props extends EmojiData {
-  onEmojiClick: (emoji: string) => void
+interface Props {
+  data: EmojiData
+  onEmojiClick: (item: EmojiData) => void
 }
 
-export const EmojiButton:React.FC<Props> = ({title, text, onEmojiClick}) => {
+export const EmojiButton:React.FC<Props> = ({data, onEmojiClick}) => {
 
   const handleEmojiClick = () => {
-    onEmojiClick(text)
+    onEmojiClick(data)
   }
 
   return <Container>
-    <Tooltip text={title}>
-      <Emoji onClick={handleEmojiClick}>{text}</Emoji>
+    <Tooltip text={data.name}>
+      <Emoji onClick={handleEmojiClick}>{data.emoji}</Emoji>
     </Tooltip>
   </Container>
 }

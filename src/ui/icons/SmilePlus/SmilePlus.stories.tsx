@@ -11,7 +11,3 @@ export default {
 export const WithWidth = () => (
   <SmilePlusIcon width={32} />
 )
-
-export const WithoutWidth = () => (
-  <SmilePlusIcon />
-)

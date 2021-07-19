@@ -10,8 +10,7 @@ export default {
 
 export const Normal = () => (
   <EmojiButton
-    text={'👍'}
-    title={'Like'}
+    data={{id: 1, name: 'Like', emoji: '👍'}}
     onEmojiClick={action('on emoji click')}
   />
 )

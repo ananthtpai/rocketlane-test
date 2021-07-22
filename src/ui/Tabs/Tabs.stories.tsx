@@ -19,10 +19,10 @@ export const Normal = () => {
     <TabPane tab='All' tabKey='all'>
       Test All
     </TabPane>
-    <TabPane tab={`❤️·${1}`} tabKey='❤️'>
+    <TabPane tab={`❤️ · ${1}`} tabKey='❤️'>
       Test ❤️
     </TabPane>
-    <TabPane tab={`👍·${1}`} tabKey='👍'>
+    <TabPane tab={`👍 · ${1}`} tabKey='👍'>
       Test ❤️
     </TabPane>
   </Tabs>

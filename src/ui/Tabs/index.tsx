@@ -7,7 +7,7 @@ interface TabPaneProps {
 }
 
 export const TabPane:React.FC<TabPaneProps> = ({tabKey, tab, children}) => {
-  return <div style={{padding: '0 16px'}}>
+  return <div style={{padding: '0 16px', lineHeight: 1.2}}>
     {children}
   </div> 
 }
@@ -15,6 +15,10 @@ export const TabPane:React.FC<TabPaneProps> = ({tabKey, tab, children}) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+
+  * {
+    font-size: 14px;
+  }
 `
 
 const TabNamesList = styled.ul`
@@ -22,15 +26,20 @@ const TabNamesList = styled.ul`
   justify-content: flex-start;
   align-items: center;
   padding: 0;
+  height: 40px;
+  border-bottom: 1px solid #e0e0e0;
 `
 
 interface TabNamesListItemProps {
   active: boolean
 }
+
 const TabNamesListItem = styled.li<TabNamesListItemProps>`
   list-style: none;
   display: flex;
-  padding: 16px;
+  align-items: center;
+  padding: 0 16px;
+  height: 100%;
   border-bottom: 2px solid ${props => props.active ? '#0f62fe': '#e0e0e0'};
   cursor: pointer;
   line-height: 1.2;

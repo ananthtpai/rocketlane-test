@@ -12,12 +12,17 @@ const Container = styled.button`
 `
 
 const Emoji = styled.div`
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &:hover {
     transform: scale(2);
     transform-origin: bottom;
   }
 `
-export type EmojiData = {
+export interface EmojiData {
   id: number,
   name: string,
   emoji: string

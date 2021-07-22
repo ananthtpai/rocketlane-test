@@ -45,6 +45,7 @@ const EmojisList = styled.div`
   padding: 0 12px;
   border: 1px solid #e0e0e0;
   box-shadow: 0 3px 10px #e0e0e0;
+  background: white;
 `
 
 export const TriggerButton:React.FC<Props> = ({emojis, onEmojiClicked}) => {

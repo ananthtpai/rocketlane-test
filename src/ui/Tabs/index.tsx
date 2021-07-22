@@ -2,12 +2,12 @@ import React, { ReactElement } from 'react'
 import styled from 'styled-components'
 
 interface TabPaneProps {
-  tab: string,
+  tab: ReactElement | string,
   tabKey: string
 }
 
-export const TabPane:React.FC<TabPaneProps> = ({tabKey, tab, children}) => {
-  return <div style={{padding: '0 16px', lineHeight: 1.2}}>
+export const TabPane:React.FC<TabPaneProps> = ({children}) => {
+  return <div style={{lineHeight: 1.2}}>
     {children}
   </div> 
 }
@@ -15,6 +15,8 @@ export const TabPane:React.FC<TabPaneProps> = ({tabKey, tab, children}) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  overflow: auto;
+  max-height: 100%;
 
   * {
     font-size: 14px;
@@ -25,9 +27,9 @@ const TabNamesList = styled.ul`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 0;
-  height: 40px;
   border-bottom: 1px solid #e0e0e0;
+  padding: 0;
+  margin: 0;
 `
 
 interface TabNamesListItemProps {
@@ -43,8 +45,13 @@ const TabNamesListItem = styled.li<TabNamesListItemProps>`
   border-bottom: 2px solid ${props => props.active ? '#0f62fe': '#e0e0e0'};
   cursor: pointer;
   line-height: 1.2;
+  height: 40px;
 `
 
+const TabContent = styled.div`
+  max-height: 100%;
+  overflow: auto;
+`
 interface Props {
   children: ReactElement<TabPaneProps>[],
   activeKey: string,
@@ -73,11 +80,11 @@ export const Tabs:React.FC<Props> = ({children, activeKey, onChange}) => {
           })
         }
       </TabNamesList>
-      <div>
+      <TabContent>
         {
           activeTab
         }
-      </div>
+      </TabContent>
     </Container>
   )
 }

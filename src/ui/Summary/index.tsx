@@ -2,16 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 
 // components
-import Tabs, { TabPane } from '../Tabs'
+import Tabs, { TabPane } from 'ui/Tabs'
+import UserReaction  from 'ui/UserReaction'
 
 //types
-import { UserContentReactionDetail } from 'types'
+import { UserContentReaction, UserContentReactionDetail } from 'types'
+import { useState } from 'react'
 
 const Container = styled.div`
   border: 1px solid #e0e0e0;
   padding: 16px 0;
   height: 300px;
-  width: 270px;
 `
 
 const Title = styled.div`
@@ -23,25 +24,61 @@ interface Props {
   userReactions: UserContentReactionDetail[]
 }
 
-export const Summary:React.FC<Props> = ({title, userReactions}) => {
-  const handleOnTabChange = (activeTab: string) => {
 
+// move to helper
+const groupBy = <T, K extends keyof any>(list: T[], getKey: (item: T) => K) =>
+  list.reduce((previous, currentItem) => {
+    const group = getKey(currentItem);
+    if (!previous[group]) previous[group] = [];
+    previous[group].push(currentItem);
+    return previous;
+  }, {} as Record<K, T[]>
+)
+
+export const Summary:React.FC<Props> = ({title, userReactions}) => {
+  const [ activeTab, setActiveTab ] = useState('all')
+  
+  const handleOnTabChange = (tab: string) => {
+    setActiveTab(tab)
   }
+
+  const renderUserReactions = (reactions: UserContentReactionDetail[]) => {
+    return <div style={{padding: '4px 0'}}>
+      {
+        reactions.map(({user, reaction}) => {
+          if (user && reaction) {
+            return <UserReaction user={user} reaction={reaction} />
+          } else {
+            return null
+          }
+        })
+      }
+    </div>
+  }
+
+  const renderTabs = () => {
+    const reactionGroups = groupBy(userReactions, item => item.reaction_id.toString())
+    const allTab = (<TabPane tab={<b>All</b>} tabKey='all'>
+        { renderUserReactions(userReactions)}
+      </TabPane>
+    )
+    const otherTabs = Object.keys(reactionGroups).map((reactionId, index) => {
+      const reactions = reactionGroups[reactionId]
+      const tabTitle = `${reactions[0].reaction?.emoji} • ${reactions.length}`
+      return <TabPane tab={tabTitle} tabKey={reactionId}>
+       { renderUserReactions(reactions) }
+      </TabPane>
+    })
+    return [ allTab, ...otherTabs ]
+  }
+
   return (
     <Container>
       <Title>{title}</Title>
       {
         userReactions.length > 0 &&
-        <Tabs activeKey='all' onChange={handleOnTabChange}>
-          <TabPane tab='All' tabKey='all'>
-            Test All
-          </TabPane>
-          <TabPane tab={`❤️ · ${1}`} tabKey='❤️'>
-            Test ❤️
-          </TabPane>
-          <TabPane tab={`👍 · ${1}`} tabKey='👍'>
-            Test ❤️
-          </TabPane>
+        <Tabs activeKey={activeTab} onChange={handleOnTabChange}>
+          {renderTabs()}
         </Tabs>
       }
     </Container>

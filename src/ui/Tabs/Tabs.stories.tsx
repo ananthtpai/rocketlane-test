@@ -16,7 +16,7 @@ export const Normal = () => {
   }
 
   return <Tabs activeKey={activeTabKey} onChange={handleTabChange} >
-    <TabPane tab='All' tabKey='all'>
+    <TabPane tab={<b>All</b>} tabKey='all'>
       Test All
     </TabPane>
     <TabPane tab={`❤️ · ${1}`} tabKey='❤️'>

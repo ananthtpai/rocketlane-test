@@ -25,7 +25,7 @@ interface Props {
 
 export const SmileIcon:React.FC<Props> = ({width}) => {
   return <Container style={{width: `${width}px`}}>
-    <img src={SmileSvg} />
+    <img src={SmileSvg} alt='smile' />
     <PlusIcon src={PlusSvg} />
   </Container>
 }

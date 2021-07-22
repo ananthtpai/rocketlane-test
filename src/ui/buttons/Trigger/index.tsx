@@ -2,14 +2,17 @@ import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 
 //components
-import SmilePlus from '../../icons/SmilePlus'
-import EmojiButton, { EmojiData } from '../Emoji'
+import SmilePlus from 'ui/icons/SmilePlus'
+import EmojiButton from 'ui/buttons/Emoji'
+
+//types
+import { Reaction } from 'types'
 
 interface Props {
   /** input array of emojis */
-  emojis: EmojiData[]
+  emojis: Reaction[]
   /** On emoji clicked send item that was clicked */
-  onEmojiClicked: (item: EmojiData) => void,
+  onEmojiClicked: (item: Reaction) => void,
   reactions?: {
     emoji: string,
     count: number
@@ -65,7 +68,7 @@ export const TriggerButton:React.FC<Props> = ({emojis, onEmojiClicked}) => {
     setShowEmojis(!showEmojis)
   }
 
-  const handleEmojiClick = (emoji: EmojiData) => {
+  const handleEmojiClick = (emoji: Reaction) => {
     onEmojiClicked(emoji)
   }
 

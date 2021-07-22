@@ -4,6 +4,9 @@ import styled from 'styled-components'
 //components
 import Tooltip from '../../Tooltip'
 
+//types
+import { Reaction } from 'types'
+
 const Container = styled.button`
   padding: 0 8px;
   border: none;
@@ -22,15 +25,10 @@ const Emoji = styled.div`
     transform-origin: bottom;
   }
 `
-export interface EmojiData {
-  id: number,
-  name: string,
-  emoji: string
-}
 
 interface Props {
-  data: EmojiData
-  onEmojiClick: (item: EmojiData) => void
+  data: Reaction
+  onEmojiClick: (item: Reaction) => void
 }
 
 export const EmojiButton:React.FC<Props> = ({data, onEmojiClick}) => {

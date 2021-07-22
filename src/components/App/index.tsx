@@ -1,18 +1,12 @@
-import React, { useEffect, useState} from 'react'
 import styled from 'styled-components'
-//apis
-import RocketlaneAPI, { User, UserContentReactionDetail } from 'api'
 
 //components
 import Summary from 'ui/Summary'
 import TriggerButton from 'ui/buttons/Trigger'
 import EmojiCount from 'ui/buttons/EmojiCount'
 
-//types
-import { EmojiData } from 'ui/buttons/Emoji'
-
-const rocketLaneAPI = new RocketlaneAPI()
-const CURRENT_USERID = 4
+//hooks
+import useFetch from './useFetch'
 
 const Container = styled.div`
   display: flex;
@@ -31,71 +25,25 @@ const groupBy = <T, K extends keyof any>(list: T[], getKey: (item: T) => K) =>
   }, {} as Record<K, T[]>
 )
 
+function getContentId() {
+  let searchParams = new URLSearchParams(window.location.search)
+  return parseInt(searchParams.get('content_id') || '')
+}
+
 const App = () => {
-  const [ reactions, setReactions ] = useState<EmojiData[]>([])
-  const [ users, setUsers ] = useState<User[]>()
-  const [ userReactions, setUserReactions] = useState<UserContentReactionDetail[]>([])
+  const { loading, error, reactions, users, userReactions } = useFetch(getContentId())
 
-  const [ contentId, setContentId ] = useState<number>()
-  useEffect(() => {
-    let searchParams = new URLSearchParams(window.location.search)
-    setContentId(parseInt(searchParams.get('content_id') || ''))
-  }, [])
-
-  useEffect(() => {
-    if (contentId) {
-      Promise.all([fetchUsers(), fetchReactions()])
-        .then(async ([users, reactions]) => {
-          setUsers(users)
-          setReactions(reactions)
-
-          const userReactions = await fetchUserContentReactions()
-          const userReactionsDetails = userReactions.map((userReaction, index) => {
-            const details: UserContentReactionDetail = {...userReaction }
-            details['user'] = users.find((user) => user.id === userReaction.user_id)
-            details['reaction'] = reactions.find((reaction) => reaction.id === userReaction.reaction_id)
-            return details
-          })
-          console.log({userReactionsDetails})
-        })
-      //can be made into a single call
-      // fetchCurrentUserContentReactions()
-    }
-  }, [contentId])
-
-  const fetchUsers = async () => {
-    const response = await rocketLaneAPI.getUsers()
-    const users = response.data
-    return users
+  if (loading) {
+    return <div>Loading</div>
   }
-
-  const fetchReactions = async () => {
-    const response = await rocketLaneAPI.getReactions()
-    const reactions = response.data
-    return reactions
-  }
-
-  const fetchCurrentUserContentReactions = async () => {
-    const response = await rocketLaneAPI.getUserContentReactions({
-      content_id: contentId,
-      user_id: CURRENT_USERID
-    })
-    const currentUserReaction = response.data
-  }
-
-  const fetchUserContentReactions = async () => {
-    const response = await rocketLaneAPI.getUserContentReactions({
-      content_id: contentId
-    })
-    const userReactions = response.data
-    return userReactions
-    console.log(groupBy(userReactions, i => i.reaction_id))
-    console.log({userReactions})
+  if (error) {
+    return <div>{error.message}</div>
   }
   return (
     <Container>
       <Summary 
         title='Reactions'
+        userReactions={userReactions}
       />
       {/* {
         <EmojiCount 

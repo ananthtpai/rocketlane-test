@@ -9,5 +9,8 @@ export default {
 }
 
 export const Normal = () => (
-  <Summary title='Reactions' />
+  <Summary 
+    title='Reactions' 
+    userReactions={[]} 
+  />
 )

@@ -7,6 +7,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   padding: 4px 8px;
+  font-weight: 500;
   > div {
     padding: 0 8px;
   }

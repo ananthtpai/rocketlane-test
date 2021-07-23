@@ -19,6 +19,7 @@ const Title = styled.div`
   padding: 0 16px;
   font-weight: bold;
 `
+
 interface Props {
   title: string,
   userReactions: UserContentReactionDetail[]
@@ -43,29 +44,25 @@ export const Summary:React.FC<Props> = ({title, userReactions}) => {
   }
 
   const renderUserReactions = (reactions: UserContentReactionDetail[]) => {
-    return <div style={{padding: '4px 0'}}>
-      {
-        reactions.map(({user, reaction}) => {
-          if (user && reaction) {
-            return <UserReaction user={user} reaction={reaction} />
-          } else {
-            return null
-          }
-        })
+    return reactions.map(({user, reaction}, index) => {
+      if (user && reaction) {
+        return <UserReaction user={user} reaction={reaction} key={index} />
+      } else {
+        return null
       }
-    </div>
+    })
   }
 
   const renderTabs = () => {
     const reactionGroups = groupBy(userReactions, item => item.reaction_id.toString())
-    const allTab = (<TabPane tab={<b>All</b>} tabKey='all'>
+    const allTab = (<TabPane tab={<b>All</b>} tabKey='all' key='all'>
         { renderUserReactions(userReactions)}
       </TabPane>
     )
     const otherTabs = Object.keys(reactionGroups).map((reactionId, index) => {
       const reactions = reactionGroups[reactionId]
       const tabTitle = `${reactions[0].reaction?.emoji} • ${reactions.length}`
-      return <TabPane tab={tabTitle} tabKey={reactionId}>
+      return <TabPane tab={tabTitle} tabKey={reactionId} key={index}>
        { renderUserReactions(reactions) }
       </TabPane>
     })

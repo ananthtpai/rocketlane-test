@@ -30,6 +30,7 @@ const TabNamesList = styled.ul`
   border-bottom: 1px solid #e0e0e0;
   padding: 0;
   margin: 0;
+  height: 40px;
 `
 
 interface TabNamesListItemProps {
@@ -51,6 +52,7 @@ const TabNamesListItem = styled.li<TabNamesListItemProps>`
 const TabContent = styled.div`
   max-height: 100%;
   overflow: auto;
+  margin: 4px 0;
 `
 interface Props {
   children: ReactElement<TabPaneProps>[],

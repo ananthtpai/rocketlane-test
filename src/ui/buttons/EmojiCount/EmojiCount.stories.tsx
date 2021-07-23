@@ -5,7 +5,12 @@ import EmojiCount from '.'
 
 export default {
   title: 'UI/Buttons/EmojiCount',
-  component: EmojiCount
+  component: EmojiCount,
+  decorators: [(Story: React.ElementType) => (
+    <div style={{margin: '40px'}}>
+      <Story />
+    </div>
+  )]
 }
 
 export const Normal = () => (

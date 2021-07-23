@@ -5,7 +5,12 @@ import Trigger from '.'
 
 export default {
   title: 'UI/Buttons/Trigger',
-  component: Trigger
+  component: Trigger,
+  decorators: [(Story: React.ElementType) => (
+    <div style={{margin: '40px'}}>
+      <Story />
+    </div>
+  )]
 }
 
 export const Normal = () => (

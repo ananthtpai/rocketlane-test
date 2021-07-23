@@ -5,7 +5,12 @@ import EmojiButton from '.'
 
 export default {
   title: 'UI/Buttons/Emoji',
-  component: EmojiButton
+  component: EmojiButton,
+  decorators: [(Story: React.ElementType) => (
+    <div style={{margin: '40px'}}>
+      <Story />
+    </div>
+  )]
 }
 
 export const Normal = () => (

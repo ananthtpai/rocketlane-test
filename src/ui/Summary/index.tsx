@@ -13,6 +13,7 @@ const Container = styled.div`
   border: 1px solid #e0e0e0;
   padding: 16px 0;
   height: 300px;
+  min-width: 270px;
 `
 
 const Title = styled.div`

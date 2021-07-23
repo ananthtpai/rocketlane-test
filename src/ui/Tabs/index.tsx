@@ -45,7 +45,6 @@ const TabNamesListItem = styled.li<TabNamesListItemProps>`
   height: 100%;
   border-bottom: 2px solid ${props => props.active ? '#0f62fe': '#e0e0e0'};
   cursor: pointer;
-  line-height: 1.2;
   height: 40px;
 `
 

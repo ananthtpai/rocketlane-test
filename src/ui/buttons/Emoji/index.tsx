@@ -33,7 +33,9 @@ interface Props {
 
 export const EmojiButton:React.FC<Props> = ({data, onEmojiClick}) => {
 
-  const handleEmojiClick = () => {
+  const handleEmojiClick:React.MouseEventHandler = (e) => {
+    e.stopPropagation()
+    e.preventDefault()
     onEmojiClick(data)
   }
 

@@ -15,15 +15,27 @@ export default {
 
 export const Normal = () => (
   <EmojiCount
-    emoji={'👍'}
+    reaction={{
+      id: 1,
+      emoji: '👍',
+      name: 'Like'
+    }}
     count={5}
   />
 )
 
 export const Highlighted = () => (
   <EmojiCount
-    emoji={'❤️'}
+    reaction={{
+      id: 1,
+      emoji: '👍',
+      name: 'Like'
+    }}
     count={1}
     highlight={true}
+    onReactionClick={async () => {
+      action('on toggle')
+      return true
+    }}
   />
 )

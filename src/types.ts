@@ -21,6 +21,6 @@ export interface UserContentReaction {
 }
 
 export interface UserContentReactionDetail extends UserContentReaction {
-  user?: User,
-  reaction?: Reaction
+  user: User,
+  reaction: Reaction
 }

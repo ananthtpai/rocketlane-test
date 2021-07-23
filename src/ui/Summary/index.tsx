@@ -1,13 +1,15 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useState } from 'react'
 import styled from 'styled-components'
 
 // components
 import Tabs, { TabPane } from 'ui/Tabs'
 import UserReaction  from 'ui/UserReaction'
 
+//helpers
+import { groupBy } from 'utils'
+
 //types
 import { UserContentReaction, UserContentReactionDetail } from 'types'
-import { useState } from 'react'
 
 const Container = styled.div`
   border: 1px solid #e0e0e0;
@@ -24,17 +26,6 @@ interface Props {
   title: ReactElement | string,
   userReactions: UserContentReactionDetail[]
 }
-
-
-// move to helper
-const groupBy = <T, K extends keyof any>(list: T[], getKey: (item: T) => K) =>
-  list.reduce((previous, currentItem) => {
-    const group = getKey(currentItem);
-    if (!previous[group]) previous[group] = [];
-    previous[group].push(currentItem);
-    return previous;
-  }, {} as Record<K, T[]>
-)
 
 export const Summary:React.FC<Props> = ({title, userReactions}) => {
   const [ activeTab, setActiveTab ] = useState('all')

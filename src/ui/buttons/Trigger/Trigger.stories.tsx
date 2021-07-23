@@ -20,6 +20,9 @@ export const Normal = () => (
       { id: 2, emoji: '❤️', name: 'Love'} , 
       { id: 3, emoji: '👏', name: 'Clap'}
     ]}
-    onEmojiClicked={action('on emoji clicked')}
+    onEmojiClicked={async () => {
+      action('on emoji clicked')
+      return true
+    }}
   />
 )

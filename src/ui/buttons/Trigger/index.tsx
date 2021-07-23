@@ -12,7 +12,7 @@ interface Props {
   /** input array of emojis */
   emojis: Reaction[]
   /** On emoji clicked send item that was clicked */
-  onEmojiClicked: (item: Reaction) => void,
+  onEmojiClicked: (item: Reaction) => Promise<boolean>,
   reactions?: {
     emoji: string,
     count: number
@@ -51,6 +51,7 @@ const EmojisList = styled.div`
 export const TriggerButton:React.FC<Props> = ({emojis, onEmojiClicked}) => {
   const triggerRef = useRef<HTMLDivElement>(null)
   const [ showEmojis, setShowEmojis ] = useState(false)
+  const [ clickEnabled, setClickEnabled ] = useState(true)
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside)
@@ -69,8 +70,12 @@ export const TriggerButton:React.FC<Props> = ({emojis, onEmojiClicked}) => {
     setShowEmojis(!showEmojis)
   }
 
-  const handleEmojiClick = (emoji: Reaction) => {
-    onEmojiClicked(emoji)
+  const handleEmojiClick = async (emoji: Reaction) => {
+    if (clickEnabled) {
+      setClickEnabled(false)
+      const response = await onEmojiClicked(emoji)
+      setClickEnabled(true)
+    }
   }
 
   return (

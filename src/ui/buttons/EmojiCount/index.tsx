@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+
+//types
+import { Reaction } from 'types'
 
 interface ContainerProps {
   highlight: boolean
@@ -14,6 +17,7 @@ const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: ${props => props.highlight && 'pointer'};
 
   > div {
     padding: 0 4px;
@@ -22,21 +26,31 @@ const Container = styled.div<ContainerProps>`
 
 interface Props {
   /** Set to true if current user selected this emoji */
+  reaction: Reaction,
+  count: number,
   highlight?: boolean
-  emoji: string,
-  count: number
+  /** Called only if the button is highlighted */
+  onReactionClick?: (reaction: Reaction) => Promise<boolean>
 }
 
-export const EmojiCount:React.FC<Props> = ({highlight = false, emoji, count}) => {
+export const EmojiCount:React.FC<Props> = ({highlight = false, reaction, count, onReactionClick}) => {
+  const [ clickEnabled, setClickEnabled ] = useState(true)
 
-  const handleOnClick:React.MouseEventHandler<HTMLDivElement> = (e) => {
-    if (highlight) {
-      return 
+  const handleOnClick:React.MouseEventHandler<HTMLDivElement> = async (e) => {
+    e.stopPropagation()
+    e.preventDefault()
+    if (highlight && onReactionClick) {
+      if (clickEnabled) {
+        setClickEnabled(false)
+        const response = await onReactionClick(reaction)
+        setClickEnabled(true)
+      }
+      return
     }
   }
   return (
     <Container highlight={highlight} onClick={handleOnClick}>
-      <div>{emoji}</div> 
+      <div>{reaction.emoji}</div> 
       <div>{count}</div>
     </Container>
   )

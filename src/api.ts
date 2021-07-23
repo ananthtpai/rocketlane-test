@@ -14,6 +14,12 @@ interface UserContentParams {
   content_id?: number
 }
 
+interface UserReactionSaveParams {
+  user_id: number, 
+  reaction_id: number, 
+  content_id: number
+}
+
 class RocketlaneAPI {
   private endpoint = 'https://artful-iudex.herokuapp.com'
   private fallbackEndpoint = 'https://my-json-server.typicode.com/artfuldev/json-db-data'
@@ -39,8 +45,8 @@ class RocketlaneAPI {
   getUserContentReactions = (params: UserContentParams) => this.withFallBack<UserContentReaction[]>((apiRoot: string) => axios.get(`${apiRoot}/user_content_reactions`, {
     params
   }))
-  saveUserContentReaction = () => axios.post(`/user_content_reactions`)
-  deleteUserContentReaction = (id: number) => this.withFallBack(() => axios.delete(`/user_content_reactions/${id}`))
+  saveUserContentReaction = (params: UserReactionSaveParams) => this.withFallBack((apiRoot: string) => axios.post<UserContentReaction>(`${apiRoot}/user_content_reactions`, params))
+  deleteUserContentReaction = (id: number) => this.withFallBack((apiRoot: string) => axios.delete(`${apiRoot}/user_content_reactions/${id}`))
 }
 
 export default RocketlaneAPI

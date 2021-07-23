@@ -7,7 +7,7 @@ interface TabPaneProps {
 }
 
 export const TabPane:React.FC<TabPaneProps> = ({children}) => {
-  return <div style={{lineHeight: 1.2}}>
+  return <div>
     {children}
   </div> 
 }

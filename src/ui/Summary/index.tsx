@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import styled from 'styled-components'
 
 // components
@@ -18,11 +18,10 @@ const Container = styled.div`
 
 const Title = styled.div`
   padding: 0 16px;
-  font-weight: bold;
 `
 
 interface Props {
-  title: string,
+  title: ReactElement | string,
   userReactions: UserContentReactionDetail[]
 }
 

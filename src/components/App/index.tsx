@@ -33,7 +33,7 @@ const App = () => {
   return (
     <Container>
       <Summary 
-        title='Reactions'
+        title={<b>Reactions</b>}
         userReactions={userReactions}
       />
       {/* {

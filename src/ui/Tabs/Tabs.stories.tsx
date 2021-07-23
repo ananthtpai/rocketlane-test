@@ -5,7 +5,8 @@ import Tabs, { TabPane } from '.'
 
 export default {
   title: 'UI/Tabs',
-  component: Tabs
+  component: Tabs,
+  subcomponents: { TabPane },
 }
 
 export const Normal = () => {

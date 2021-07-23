@@ -8,9 +8,16 @@ export default {
   component: Summary
 }
 
-export const Normal = () => (
+export const NormalTitle = () => (
   <Summary 
     title='Reactions' 
     userReactions={[]} 
+  />
+)
+
+export const TitleAsReactElement = () => (
+  <Summary
+    title={<b>Reactions</b>}
+    userReactions={[]}
   />
 )

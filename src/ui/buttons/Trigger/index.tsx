@@ -73,7 +73,7 @@ export const TriggerButton:React.FC<Props> = ({emojis, onEmojiClicked}) => {
   const handleEmojiClick = async (emoji: Reaction) => {
     if (clickEnabled) {
       setClickEnabled(false)
-      const response = await onEmojiClicked(emoji)
+      await onEmojiClicked(emoji)
       setClickEnabled(true)
     }
   }

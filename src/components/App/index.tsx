@@ -17,6 +17,7 @@ import { Reaction } from 'types'
 const Container = styled.div`
   display: flex;
   align-items: center;
+  padding: 30px;
   > div {
     margin: 0 8px;
   }
@@ -30,7 +31,7 @@ function getContentId() {
 const CURRENT_USERID = 4
 
 const App = () => {
-  const { loading, error, reactions, users, userReactions, toggleUserReaction, getUserReactionForReactionId } = useReaction(getContentId())
+  const { loading, error, reactions, userReactions, toggleUserReaction, getUserReactionForReactionId } = useReaction(getContentId())
 
   const handleOnEmojiClicked = (reaction: Reaction) => {
     return toggleUserReaction(CURRENT_USERID, reaction)
@@ -38,10 +39,10 @@ const App = () => {
 
   
   if (loading) {
-    return <div>Loading</div>
+    return <Container>Loading</Container>
   }
   if (error) {
-    return <div>{error.message}</div>
+    return <Container>{error.message}</Container>
   }
 
   const groupedReactions = groupBy(userReactions, item => item.reaction_id.toString())
@@ -62,7 +63,7 @@ const App = () => {
             key={index}
             reaction={reaction}
             count={count}
-            highlight={currentUserReaction && currentUserReaction.reaction_id == reaction.id}
+            highlight={currentUserReaction && currentUserReaction.reaction_id === reaction.id}
             onReactionClick={handleOnEmojiClicked}
           />
         })

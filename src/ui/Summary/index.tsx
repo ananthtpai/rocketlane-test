@@ -9,7 +9,7 @@ import UserReaction  from 'ui/UserReaction'
 import { groupBy } from 'utils'
 
 //types
-import { UserContentReaction, UserContentReactionDetail } from 'types'
+import { UserContentReactionDetail } from 'types'
 
 const Container = styled.div`
   border: 1px solid #e0e0e0;

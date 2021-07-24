@@ -42,7 +42,7 @@ export const EmojiCount:React.FC<Props> = ({highlight = false, reaction, count, 
     if (highlight && onReactionClick) {
       if (clickEnabled) {
         setClickEnabled(false)
-        const response = await onReactionClick(reaction)
+        await onReactionClick(reaction)
         setClickEnabled(true)
       }
       return

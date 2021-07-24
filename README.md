@@ -26,3 +26,9 @@ Deploys the application to [github pages](https://ananthtpai.github.io/rocketlan
 
 Deploys Storybook application to [github pages](https://ananthtpai.github.io/rocketlane-storybook/)
 
+## Improvements
+* Better documentation and usecases in storybook for each component
+* Responsive design handling
+* React and unreact make it more dynamic and realtime
+* Highlight current user in the Summary Component and show him/her at the top
+

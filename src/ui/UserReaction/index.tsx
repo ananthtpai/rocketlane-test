@@ -27,7 +27,7 @@ interface Props {
 
 export const UserReaction:React.FC<Props> = ({user, reaction}) => {
   return <Container>
-    <ImageContainer><img src={user.avatar} /></ImageContainer>
+    <ImageContainer><img src={user.avatar} alt='Avatar' /></ImageContainer>
     <div>{reaction.emoji}</div>
     <div>{user.first_name} {user.last_name}</div>
   </Container>

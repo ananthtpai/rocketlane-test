@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import RocketlaneAPI from 'api'
 
 //types
-import { User, UserContentReactionDetail, Reaction, UserContentReaction } from 'types'
+import { User, UserContentReactionDetail, Reaction } from 'types'
 
 const rocketLaneAPI = new RocketlaneAPI()
 const fetchUsers = async () => {
@@ -54,7 +54,7 @@ const useReaction = (contentId: number) => {
   
         const userReactions = await fetchUserContentReactions(contentId)
         const userReactionsDetails:UserContentReactionDetail[] = []
-        userReactions.map((userReaction, index) => {
+        userReactions.forEach((userReaction, index) => {
           const user = users.find((user) => user.id === userReaction.user_id)
           const reaction = reactions.find((reaction) => reaction.id === userReaction.reaction_id)
           if (user && reaction) {

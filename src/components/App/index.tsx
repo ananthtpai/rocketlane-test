@@ -45,7 +45,6 @@ const App = () => {
   }
 
   const groupedReactions = groupBy(userReactions, item => item.reaction_id.toString())
-
   return (
     <Container>
       <Summary 

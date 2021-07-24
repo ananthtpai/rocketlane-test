@@ -64,10 +64,13 @@ export const Summary:React.FC<Props> = ({title, userReactions}) => {
     <Container>
       <Title>{title}</Title>
       {
-        userReactions.length > 0 &&
+        userReactions.length > 0 ?
         <Tabs activeKey={activeTab} onChange={handleOnTabChange}>
           {renderTabs()}
         </Tabs>
+        : <div style={{padding: '8px 16px'}}>
+          No Summary Data
+        </div>
       }
     </Container>
   )

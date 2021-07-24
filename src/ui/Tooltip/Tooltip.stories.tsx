@@ -4,7 +4,12 @@ import Tooltip from '.'
 
 export default {
   title: 'UI/Tooltip',
-  component: Tooltip
+  component: Tooltip,
+  decorators: [(Story: React.ElementType) => (
+    <div style={{margin: '40px'}}>
+      <Story />
+    </div>
+  )]
 }
 
 export const Normal = () => (

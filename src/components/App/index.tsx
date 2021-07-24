@@ -24,7 +24,7 @@ const Container = styled.div`
 
 function getContentId() {
   let searchParams = new URLSearchParams(window.location.search)
-  return parseInt(searchParams.get('content_id') || '')
+  return parseInt(searchParams.get('content_id') || '1')
 }
 
 const CURRENT_USERID = 4
